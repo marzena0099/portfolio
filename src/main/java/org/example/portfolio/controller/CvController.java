@@ -60,6 +60,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 @RestController
 @RequestMapping("/api/cv")
 @RequiredArgsConstructor
@@ -72,7 +75,6 @@ public class CvController {
     public ResponseEntity<byte[]> downloadCv() {
         CvFile cv = cvRepository.findTopByOrderByIdDesc();
 
-        // Sprawdzenie, czy rekord istnieje i ma dane
         if(cv == null || cv.getData() == null || cv.getFileName() == null) {
             System.err.println("Brak danych CV w bazie!");
             return ResponseEntity.notFound().build();
@@ -80,9 +82,13 @@ public class CvController {
 
         System.out.println("Pobieram CV: " + cv.getFileName() + ", rozmiar: " + cv.getData().length + " bajtów");
 
+        // zakodowanie nazwy pliku w UTF-8
+        String encodedFileName = URLEncoder.encode(cv.getFileName(), StandardCharsets.UTF_8).replaceAll("\\+", "%20");
+
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + cv.getFileName() + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + encodedFileName)
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(cv.getData());
     }
+
 }
