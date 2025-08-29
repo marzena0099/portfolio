@@ -2,12 +2,26 @@
   <div>
     <h1>Projects</h1>
   </div>
+<!--  <section id="projects" class="section-box">-->
+<!--    <h2>Projekty</h2>-->
+<!--    <div class="projects-grid">-->
+<!--      <ProjectCard-->
+<!--          v-for="proj in projects"-->
+<!--          :key="proj.id"-->
+<!--          :project="proj"-->
+<!--      />-->
+<!--    </div>-->
+<!--  </section>-->
 </template>
 
 <script>
+import ProjectCard from "@/components/ProjectCard.vue";
+
 export default {
-  name: "Projects"
+  name: "Projects",
+  components: {ProjectCard}
 }
+
 </script>
 <style>
 .portfolio-section {
