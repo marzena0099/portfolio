@@ -13,10 +13,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class ExperienceLoaderService {
-    //
     private final ExperienceService experienceService;
-    private final ExperienceRepository experienceRepository;
-    //
     @Value("${CV_FILE_PATH}")
     private String cvFilePath;
 

@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,6 @@ public class ExperienceService {
     public void reloadFromCV(File cvFile) throws IOException {
         List<Experience> experiences = parseExperience(cvFile);
 
-        // Wyczyść stare wpisy (jeśli chcesz mieć tylko aktualne z CV)
         experienceRepository.deleteAll();
 
         for (Experience exp : experiences) {
@@ -57,14 +57,7 @@ public class ExperienceService {
             String text = stripper.getText(document);
 
 
-            String lowerText = text.toLowerCase();
-            int cutIndex = lowerText.indexOf("wykształcenie");
-            if (cutIndex == -1) {
-                cutIndex = lowerText.indexOf("pasje");
-            }
-            if (cutIndex != -1) {
-                text = text.substring(0, cutIndex);
-            }
+            text = findExperienceEnd(text);
             String[] entries = text.split("(?=\\d{2}/\\d{4} – \\d{2}/\\d{4}|\\d{2}/\\d{4} – present)");
 
             for (String entry : entries) {
@@ -84,21 +77,14 @@ public class ExperienceService {
                         exp.setTitle(headerMatcher.group("title").trim());
                         exp.setCompany(headerMatcher.group("company").trim());
 
-                        exp.setStartDate(LocalDate.parse(
-                                "01/" + headerMatcher.group("start"),
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                        ));
+                        exp.setStartDate(YearMonth.parse(headerMatcher.group("start"), FORMATTER));
 
                         String endStr = headerMatcher.group("end").trim();
                         if (endStr.equalsIgnoreCase("present")) {
                             exp.setEndDate(null);
                         } else {
-                            exp.setEndDate(LocalDate.parse(
-                                    "01/" + endStr,
-                                    DateTimeFormatter.ofPattern("dd/MM/yyyy")
-                            ));
+                            exp.setEndDate(YearMonth.parse(endStr, FORMATTER));
                         }
-
                         // Pobieramy opis i dzielimy na podpunkty
                         String description = entry.substring(headerMatcher.end()).trim();
                         String[] subpoints = description.split("(?<=\\)|\\.|;|\\n)"); // kończy na ), ., ; lub nowa linia
@@ -123,7 +109,20 @@ public class ExperienceService {
         }
 
     }
-private String cleanDescription(String rawDesc) {
+
+    private static String findExperienceEnd(String text) {
+        String lowerText = text.toLowerCase();
+        int cutIndex = lowerText.indexOf("wykształcenie");
+        if (cutIndex == -1) {
+            cutIndex = lowerText.indexOf("pasje");
+        }
+        if (cutIndex != -1) {
+            text = text.substring(0, cutIndex);
+        }
+        return text;
+    }
+
+    private String cleanDescription(String rawDesc) {
     if (rawDesc == null || rawDesc.isEmpty()) {
         return "";
     }
@@ -137,3 +136,4 @@ private String cleanDescription(String rawDesc) {
 
 
 }
+
