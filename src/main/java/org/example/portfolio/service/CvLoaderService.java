@@ -1,4 +1,4 @@
-package org.example.portfolio.config;
+package org.example.portfolio.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import java.nio.file.Files;
 
 @Component
 @RequiredArgsConstructor
-public class CvLoader {
+public class CvLoaderService {
 
     private final CvRepository cvRepository;
 

@@ -39,6 +39,8 @@
 
 /* Tutaj możesz dopisać swoje dodatkowe style globalne */
 /*body {*/
-
+    .description {
+        white-space: pre-line;
+    }
 
 /*}*/
