@@ -14,7 +14,10 @@ public class Projects {
     private String title;
     private String link;
     private String technologies;
-    @Column(length = 2000)
+
+    @Column(length = 8000)
     private String description;
+
+    private String githubLink;
 
 }

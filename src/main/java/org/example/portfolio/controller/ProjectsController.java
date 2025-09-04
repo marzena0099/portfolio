@@ -1,13 +1,16 @@
 package org.example.portfolio.controller;
 
+import org.springframework.core.io.Resource;
 import lombok.AllArgsConstructor;
 import org.example.portfolio.entity.Projects;
 import org.example.portfolio.repository.ProjectsRepository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @RestController
@@ -20,4 +23,20 @@ private final ProjectsRepository projectsRepository;
     public List<Projects> getAllProjects() {
     return projectsRepository.findAll();
 }
+
+
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> downloadProject(@PathVariable Long id) {
+        Projects project = projectsRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Projekt nie znaleziony"));
+
+        Path file = Paths.get("downloads").resolve(project.getLink());
+        FileSystemResource resource = new FileSystemResource(file);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + file.getFileName())
+                .body(resource);
+    }
+
 }
