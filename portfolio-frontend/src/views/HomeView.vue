@@ -699,16 +699,217 @@
 <!--}-->
 <!--</style>-->
 
+<!--&#45;&#45;&#45;&#45; dzialajace &#45;&#45;&#45;&#45; -->
+
+<!--<template>-->
+<!--  <div class="home">-->
+
+<!--    &lt;!&ndash; Sekcja: O mnie &ndash;&gt;-->
+<!--    <section id="about" class="about-section section-box">-->
+<!--      <div class="profile-container">-->
+
+<!--        &lt;!&ndash; Górna część: zdjęcie + dane kontaktowe z nagłówkiem &ndash;&gt;-->
+<!--        <div class="profile-top">-->
+<!--          <img src="@/assets/images/MB_CV.jpg" alt="Marzena Białończyk" class="profile-image" />-->
+
+<!--          <div class="profile-contact-wrapper">-->
+<!--            <div class="profile-header">-->
+<!--              <h1>Marzena Białończyk</h1>-->
+<!--              <p class="title">Programistka Java</p>-->
+<!--            </div>-->
+
+<!--            <div class="contact-card card short-card">-->
+<!--              <h2>Dane kontaktowe</h2>-->
+<!--              <ul class="contact-info">-->
+<!--                <li><strong>E-mail:</strong> bialonczyk9182@gmail.com</li>-->
+<!--                <li><strong>Tel:</strong> +48 516 083 143</li>-->
+<!--                <li><strong>LinkedIn:</strong>-->
+<!--                  <a href="https://www.linkedin.com/in/marzenabialonczyk/" target="_blank">Marzena Białończyk</a>-->
+<!--                </li>-->
+<!--                <li><strong>GitHub:</strong>-->
+<!--                  <a href="https://github.com/marzena0099?tab=repositories" target="_blank">marzena0099</a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Dolne karty: O mnie, Umiejętności, Języki &ndash;&gt;-->
+<!--        <div class="profile-bottom">-->
+<!--          <div class="card same-width">-->
+<!--            <h2>O mnie</h2>-->
+<!--            <p>-->
+<!--              Jestem programistką Java z zamiłowaniem do tworzenia backendu i frontendu – w pracy korzystam z Vue.js.-->
+<!--              Uwielbiam testować oprogramowanie, pracować z bazami danych i szukać optymalnych rozwiązań.-->
+<!--            </p>-->
+<!--          </div>-->
+
+<!--          <div class="card same-width">-->
+<!--            <h2>Umiejętności techniczne</h2>-->
+<!--            <p>-->
+<!--              Java, Spring Boot, Vue, HTML, JavaScript, REST API, Postman, Git, Docker, SQL, IntelliJ IDEA, JIRA, Confluence,-->
+<!--              testowanie (API, eksploracyjne, integracyjne, regresja, E2E, UAT, re-testy), zgłaszanie błędów-->
+<!--            </p>-->
+<!--          </div>-->
+
+<!--          <div class="card same-width">-->
+<!--            <h2>Języki obce</h2>-->
+<!--            <p>Angielski: B1+</p>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Doświadczenie &ndash;&gt;-->
+<!--        <h2>Doświadczenie</h2>-->
+<!--        <div class="experience-list">-->
+<!--          <ExperienceItem-->
+<!--              v-for="exp in experience"-->
+<!--              :key="exp.id"-->
+<!--              :experience="exp"-->
+<!--          />-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </section>-->
+
+<!--  </div>-->
+<!--</template>-->
+
+<!--<script>-->
+<!--import ExperienceItem from "@/components/ExperienceItem.vue";-->
+<!--import axios from "axios";-->
+
+<!--export default {-->
+<!--  components: { ExperienceItem },-->
+<!--  data() {-->
+<!--    return {-->
+<!--      experience: [],-->
+<!--    };-->
+<!--  },-->
+<!--  mounted() {-->
+<!--    axios.get("http://localhost:8080/api/experience")-->
+<!--        .then(res => this.experience = res.data)-->
+<!--        .catch(err => console.error("Błąd pobierania experience:", err));-->
+<!--  }-->
+<!--};-->
+<!--</script>-->
+
+<!--<style scoped>-->
+<!--.about-section {-->
+<!--  background: rgba(255, 255, 255, 0.75);-->
+<!--  border-radius: 1rem;-->
+<!--  padding: 2rem;-->
+<!--  box-shadow: 0 4px 15px rgba(0,0,0,0.1);-->
+<!--  max-width: 1000px;-->
+<!--  margin: 2rem auto;-->
+<!--}-->
+
+<!--/* Profil górna część: zdjęcie + header + kontakt */-->
+<!--.profile-top {-->
+<!--  display: flex;-->
+<!--  gap: 2rem;-->
+<!--  align-items: flex-start;-->
+<!--}-->
+
+<!--.profile-image {-->
+<!--  width: 250px;-->
+<!--  border-radius: 1rem;-->
+<!--  object-fit: cover;-->
+<!--  box-shadow: 0 4px 12px rgba(0,0,0,0.1);-->
+<!--}-->
+
+<!--/* Wrapper nagłówek + kontakt obok zdjęcia */-->
+<!--.profile-contact-wrapper {-->
+<!--  display: flex;-->
+<!--  flex-direction: column;-->
+<!--  justify-content: flex-start;-->
+<!--  flex: 1;-->
+<!--}-->
+
+<!--/* Nagłówek */-->
+<!--.profile-header h1 {-->
+<!--  margin-bottom: 0.3rem;-->
+<!--}-->
+<!--.profile-header .title {-->
+<!--  font-weight: 600;-->
+<!--  color: #f687b3;-->
+<!--  margin-bottom: 1rem;-->
+<!--}-->
+
+<!--/* Karta kontaktowa */-->
+<!--.card {-->
+<!--  background: #ffffff;-->
+<!--  border-radius: 1rem;-->
+<!--  padding: 1rem;-->
+<!--  box-shadow: 0 4px 12px rgba(0,0,0,0.08);-->
+<!--  transition: transform 0.2s ease, box-shadow 0.2s ease;-->
+<!--  margin-bottom: 1rem;-->
+<!--}-->
+<!--.card:hover {-->
+<!--  transform: translateY(-4px);-->
+<!--  box-shadow: 0 6px 16px rgba(0,0,0,0.12);-->
+<!--}-->
+
+<!--/* Skrócona karta kontaktowa */-->
+<!--.short-card {-->
+<!--  max-width: 300px;-->
+<!--}-->
+
+<!--/* Dolne karty */-->
+<!--.profile-bottom {-->
+<!--  display: flex;-->
+<!--  flex-direction: column;-->
+<!--  gap: 1rem;-->
+<!--  max-width: 700px;-->
+<!--  margin-top: 2rem;-->
+<!--}-->
+
+<!--.same-width {-->
+<!--  max-width: 700px; /* dopasowanie do doświadczenia */-->
+<!--}-->
+
+<!--/* Experience list */-->
+<!--.experience-list {-->
+<!--  display: flex;-->
+<!--  flex-direction: column;-->
+<!--  gap: 1rem;-->
+<!--  max-width: 700px;-->
+<!--}-->
+
+<!--/* Contact list */-->
+<!--.contact-info {-->
+<!--  list-style: none;-->
+<!--  padding: 0;-->
+<!--  margin: 0.5rem 0 0.5rem 0;-->
+<!--}-->
+<!--.contact-info li {-->
+<!--  margin-bottom: 0.25rem;-->
+<!--}-->
+
+<!--/* -&#45;&#45; RESPONSYWNOŚĆ -&#45;&#45; */-->
+<!--@media (max-width: 768px) {-->
+<!--  .profile-top {-->
+<!--    flex-direction: column;-->
+<!--    align-items: center;-->
+<!--  }-->
+
+<!--  .profile-contact-wrapper {-->
+<!--    width: 100%;-->
+<!--    align-items: center;-->
+<!--  }-->
+
+<!--  .short-card, .same-width, .experience-list {-->
+<!--    max-width: 100%;-->
+<!--  }-->
+<!--}-->
+<!--</style>-->
 
 
 <template>
   <div class="home">
-
-    <!-- Sekcja: O mnie -->
     <section id="about" class="about-section section-box">
       <div class="profile-container">
 
-        <!-- Górna część: zdjęcie + dane kontaktowe z nagłówkiem -->
+        <!-- Górna część: zdjęcie + dane kontaktowe -->
         <div class="profile-top">
           <img src="@/assets/images/MB_CV.jpg" alt="Marzena Białończyk" class="profile-image" />
 
@@ -734,27 +935,29 @@
           </div>
         </div>
 
-        <!-- Dolne karty: O mnie, Umiejętności, Języki -->
+        <!-- Dolne sekcje z akordeonem -->
         <div class="profile-bottom">
-          <div class="card same-width">
-            <h2>O mnie</h2>
-            <p>
-              Jestem programistką Java z zamiłowaniem do tworzenia backendu i frontendu – w pracy korzystam z Vue.js.
-              Uwielbiam testować oprogramowanie, pracować z bazami danych i szukać optymalnych rozwiązań.
-            </p>
-          </div>
+          <div v-for="(section, index) in sections" :key="index" class="card same-width">
+            <h2 class="expandable-header" @click="toggleSection(index)">
+              {{ section.title }}
+              <span class="triangle" :class="{ open: section.open }">▼</span>
+            </h2>
+            <div v-show="section.open" class="card-content">
 
-          <div class="card same-width">
-            <h2>Umiejętności techniczne</h2>
-            <p>
-              Java, Spring Boot, Vue, HTML, JavaScript, REST API, Postman, Git, Docker, SQL, IntelliJ IDEA, JIRA, Confluence,
-              testowanie (API, eksploracyjne, integracyjne, regresja, E2E, UAT, re-testy), zgłaszanie błędów
-            </p>
-          </div>
+              <!-- Specjalnie dla "Kim jestem" dodajemy zdjęcie -->
+              <div v-if="section.title === 'Kim jestem'" class="personal-container">
+                <img src="@/assets/images/zdj_o_mnie.jpg" alt="Marzena na wakacjach" class="personal-image" />
+                <div class="personal-info">
+                  <p v-for="(line, idx) in section.content" :key="idx">{{ line }}</p>
+                </div>
+              </div>
 
-          <div class="card same-width">
-            <h2>Języki obce</h2>
-            <p>Angielski: B1+</p>
+              <!-- Pozostałe sekcje pozostają tylko tekstem -->
+              <div v-else>
+                <p v-for="(line, idx) in section.content" :key="idx">{{ line }}</p>
+              </div>
+
+            </div>
           </div>
         </div>
 
@@ -770,7 +973,6 @@
 
       </div>
     </section>
-
   </div>
 </template>
 
@@ -783,12 +985,32 @@ export default {
   data() {
     return {
       experience: [],
+      sections: [
+        { title: "O mnie", content: [
+            "Jestem programistką Java z zamiłowaniem do backendu i frontendu.",
+            "Uwielbiam testować oprogramowanie, pracować z bazami danych i szukać optymalnych rozwiązań."
+          ], open: false },
+        { title: "Umiejętności techniczne", content: [
+            "Java, Spring Boot, Vue, HTML, JavaScript, REST API, Postman, Git, Docker, SQL, IntelliJ IDEA, JIRA, Confluence"
+          ], open: false },
+        { title: "Języki obce", content: ["Angielski: B1+"] , open: false },
+        { title: "Kim jestem", content: [
+            "Poza kodem uwielbiam muzykę – gram na gitarze, co daje mi przestrzeń do wyrażania siebie i rozwijania kreatywności.",
+            "Regularnie biegam, dbając o kondycję fizyczną i zdrowy styl życia, a kontakt z naturą pomaga mi zachować równowagę i spokój.",
+            "Łączę techniczne umiejętności z ciekawością świata i pozytywnym podejściem do ludzi, dlatego chętnie podejmuję współpracę przy nowych projektach."
+          ], open: false }
+      ]
     };
   },
   mounted() {
     axios.get("http://localhost:8080/api/experience")
         .then(res => this.experience = res.data)
         .catch(err => console.error("Błąd pobierania experience:", err));
+  },
+  methods: {
+    toggleSection(index) {
+      this.sections[index].open = !this.sections[index].open; // przełączanie
+    }
   }
 };
 </script>
@@ -803,7 +1025,6 @@ export default {
   margin: 2rem auto;
 }
 
-/* Profil górna część: zdjęcie + header + kontakt */
 .profile-top {
   display: flex;
   gap: 2rem;
@@ -817,15 +1038,12 @@ export default {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Wrapper nagłówek + kontakt obok zdjęcia */
 .profile-contact-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   flex: 1;
 }
 
-/* Nagłówek */
 .profile-header h1 {
   margin-bottom: 0.3rem;
 }
@@ -835,7 +1053,7 @@ export default {
   margin-bottom: 1rem;
 }
 
-/* Karta kontaktowa */
+/* Karty */
 .card {
   background: #ffffff;
   border-radius: 1rem;
@@ -844,30 +1062,64 @@ export default {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   margin-bottom: 1rem;
 }
+
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-/* Skrócona karta kontaktowa */
+/* Nagłówek rozwijalny */
+.expandable-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  transition: color 0.2s;
+  color: #1f2937; /* domyślny ciemny kolor */
+}
+
+/* Po najechaniu i aktywne */
+.expandable-header:hover,
+.expandable-header:focus,
+.expandable-header:active {
+  color: #f687b3; /* różowy odcień pasujący do trójkąta */
+}
+
+/* Możemy też ustawić kolor różowy gdy sekcja jest otwarta */
+.expandable-header .triangle.open {
+  border-top-color: #f687b3; /* różowy trójkąt */
+}
+
+/* Jeśli chcemy zmienić też kolor tekstu nagłówka gdy sekcja otwarta */
+.card-content + .expandable-header.open {
+  color: #f687b3;
+}
+
+
+.arrow {
+  transition: transform 0.3s;
+}
+.arrow.open {
+  transform: rotate(180deg);
+}
+
+
 .short-card {
   max-width: 300px;
 }
 
-/* Dolne karty */
+.same-width {
+  max-width: 700px;
+}
+
 .profile-bottom {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 700px;
   margin-top: 2rem;
 }
 
-.same-width {
-  max-width: 700px; /* dopasowanie do doświadczenia */
-}
-
-/* Experience list */
 .experience-list {
   display: flex;
   flex-direction: column;
@@ -875,7 +1127,6 @@ export default {
   max-width: 700px;
 }
 
-/* Contact list */
 .contact-info {
   list-style: none;
   padding: 0;
@@ -885,23 +1136,285 @@ export default {
   margin-bottom: 0.25rem;
 }
 
-/* --- RESPONSYWNOŚĆ --- */
-@media (max-width: 768px) {
-  .profile-top {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .profile-contact-wrapper {
-    width: 100%;
-    align-items: center;
-  }
-
-  .short-card, .same-width, .experience-list {
-    max-width: 100%;
-  }
+/* Sekcja Kim jestem */
+.personal-container {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
 }
+
+.personal-image {
+  width: 200px; /* mniejsze niż główne zdjęcie */
+  border-radius: 1rem;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.personal-info {
+  flex: 1;
+}
+
+/* Fikuśny trójkąt różowy */
+.triangle {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #f687b3; /* różowy odcień pasujący do nagłówków */
+  transition: transform 0.3s ease;
+}
+
+.triangle.open {
+  transform: rotate(180deg);
+}
+
+
 </style>
+
+
+
+<!--<template>-->
+<!--  <div class="home">-->
+
+<!--    &lt;!&ndash; Sekcja: O mnie &ndash;&gt;-->
+<!--    <section id="about" class="about-section section-box">-->
+<!--      <div class="profile-container">-->
+
+<!--        &lt;!&ndash; Górna część: zdjęcie + dane kontaktowe &ndash;&gt;-->
+<!--        <div class="profile-top">-->
+<!--          <img src="@/assets/images/MB_CV.jpg" alt="Marzena Białończyk" class="profile-image" />-->
+
+<!--          <div class="profile-contact-wrapper">-->
+<!--            <div class="profile-header">-->
+<!--              <h1>Marzena Białończyk</h1>-->
+<!--              <p class="title">Programistka Java</p>-->
+<!--            </div>-->
+
+<!--            <div class="contact-card card short-card">-->
+<!--              <h2>Dane kontaktowe</h2>-->
+<!--              <ul class="contact-info">-->
+<!--                <li><strong>E-mail:</strong> bialonczyk9182@gmail.com</li>-->
+<!--                <li><strong>Tel:</strong> +48 516 083 143</li>-->
+<!--                <li><strong>LinkedIn:</strong>-->
+<!--                  <a href="https://www.linkedin.com/in/marzenabialonczyk/" target="_blank">Marzena Białończyk</a>-->
+<!--                </li>-->
+<!--                <li><strong>GitHub:</strong>-->
+<!--                  <a href="https://github.com/marzena0099?tab=repositories" target="_blank">marzena0099</a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Dolne akordeony: O mnie, Umiejętności, Języki &ndash;&gt;-->
+<!--        <div class="profile-bottom">-->
+<!--          <div-->
+<!--              class="card same-width accordion"-->
+<!--              :class="{ open: openSection === 'about' }"-->
+<!--              @click="toggleSection('about')"-->
+<!--          >-->
+<!--            <h2>O mnie</h2>-->
+<!--            <div class="accordion-content">-->
+<!--              <p>-->
+<!--                Jestem programistką Java z zamiłowaniem do tworzenia backendu i frontendu – w pracy korzystam z Vue.js.-->
+<!--                Uwielbiam testować oprogramowanie, pracować z bazami danych i szukać optymalnych rozwiązań.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div-->
+<!--              class="card same-width accordion"-->
+<!--              :class="{ open: openSection === 'skills' }"-->
+<!--              @click="toggleSection('skills')"-->
+<!--          >-->
+<!--            <h2>Umiejętności techniczne</h2>-->
+<!--            <div class="accordion-content">-->
+<!--              <p>-->
+<!--                Java, Spring Boot, Vue, HTML, JavaScript, REST API, Postman, Git, Docker, SQL, IntelliJ IDEA, JIRA, Confluence,-->
+<!--                testowanie (API, eksploracyjne, integracyjne, regresja, E2E, UAT, re-testy), zgłaszanie błędów-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div-->
+<!--              class="card same-width accordion"-->
+<!--              :class="{ open: openSection === 'languages' }"-->
+<!--              @click="toggleSection('languages')"-->
+<!--          >-->
+<!--            <h2>Języki obce</h2>-->
+<!--            <div class="accordion-content">-->
+<!--              <p>Angielski: B1+</p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Doświadczenie &ndash;&gt;-->
+<!--        <h2>Doświadczenie</h2>-->
+<!--        <div class="experience-list">-->
+<!--          <ExperienceItem-->
+<!--              v-for="exp in experience"-->
+<!--              :key="exp.id"-->
+<!--              :experience="exp"-->
+<!--          />-->
+<!--        </div>-->
+
+<!--      </div>-->
+<!--    </section>-->
+
+<!--  </div>-->
+<!--</template>-->
+
+<!--<script>-->
+<!--import ExperienceItem from "@/components/ExperienceItem.vue";-->
+<!--import axios from "axios";-->
+
+<!--export default {-->
+<!--  components: { ExperienceItem },-->
+<!--  data() {-->
+<!--    return {-->
+<!--      experience: [],-->
+<!--      openSection: null, // który akordeon jest otwarty-->
+<!--    };-->
+<!--  },-->
+<!--  mounted() {-->
+<!--    axios.get("http://localhost:8080/api/experience")-->
+<!--        .then(res => this.experience = res.data)-->
+<!--        .catch(err => console.error("Błąd pobierania experience:", err));-->
+<!--  },-->
+<!--  methods: {-->
+<!--    toggleSection(section) {-->
+<!--      this.openSection = this.openSection === section ? null : section;-->
+<!--    }-->
+<!--  }-->
+<!--};-->
+<!--</script>-->
+
+<!--<style scoped>-->
+<!--.about-section {-->
+<!--  background: rgba(255, 255, 255, 0.75);-->
+<!--  border-radius: 1rem;-->
+<!--  padding: 2rem;-->
+<!--  box-shadow: 0 4px 15px rgba(0,0,0,0.1);-->
+<!--  max-width: 1000px;-->
+<!--  margin: 2rem auto;-->
+<!--}-->
+
+<!--.profile-top {-->
+<!--  display: flex;-->
+<!--  gap: 2rem;-->
+<!--  align-items: flex-start;-->
+<!--}-->
+
+<!--.profile-image {-->
+<!--  width: 250px;-->
+<!--  border-radius: 1rem;-->
+<!--  object-fit: cover;-->
+<!--  box-shadow: 0 4px 12px rgba(0,0,0,0.1);-->
+<!--}-->
+
+<!--.profile-contact-wrapper {-->
+<!--  display: flex;-->
+<!--  flex-direction: column;-->
+<!--  justify-content: flex-start;-->
+<!--  flex: 1;-->
+<!--}-->
+
+<!--.profile-header h1 {-->
+<!--  margin-bottom: 0.3rem;-->
+<!--}-->
+<!--.profile-header .title {-->
+<!--  font-weight: 600;-->
+<!--  color: #f687b3;-->
+<!--  margin-bottom: 1rem;-->
+<!--}-->
+
+<!--/* Karty */-->
+<!--.card {-->
+<!--  background: #ffffff;-->
+<!--  border-radius: 1rem;-->
+<!--  padding: 1rem;-->
+<!--  box-shadow: 0 4px 12px rgba(0,0,0,0.08);-->
+<!--  transition: transform 0.2s ease, box-shadow 0.2s ease, max-height 0.3s ease;-->
+<!--  margin-bottom: 1rem;-->
+<!--  cursor: pointer;-->
+<!--}-->
+<!--.card:hover {-->
+<!--  transform: translateY(-2px);-->
+<!--  box-shadow: 0 6px 16px rgba(0,0,0,0.12);-->
+<!--}-->
+
+<!--/* Kontakt przy zdjęciu */-->
+<!--.short-card {-->
+<!--  max-width: 300px;-->
+<!--}-->
+
+<!--/* Dolne karty akordeon */-->
+<!--.accordion .accordion-content {-->
+<!--  max-height: 0;-->
+<!--  overflow: hidden;-->
+<!--  transition: max-height 0.3s ease;-->
+<!--}-->
+
+<!--.accordion.open .accordion-content {-->
+<!--  max-height: 200px; /* dostosuj do potrzeb */-->
+<!--}-->
+
+<!--/* Szerokość dopasowana do ExperienceItem */-->
+<!--.same-width {-->
+<!--  max-width: 700px;-->
+<!--}-->
+
+<!--.profile-bottom {-->
+<!--  display: flex;-->
+<!--  flex-direction: column;-->
+<!--  gap: 1rem;-->
+<!--  margin-top: 2rem;-->
+<!--}-->
+
+<!--/* Experience list */-->
+<!--.experience-list {-->
+<!--  display: flex;-->
+<!--  flex-direction: column;-->
+<!--  gap: 1rem;-->
+<!--  max-width: 700px;-->
+<!--}-->
+
+<!--/* Contact list */-->
+<!--.contact-info {-->
+<!--  list-style: none;-->
+<!--  padding: 0;-->
+<!--  margin: 0.5rem 0 0.5rem 0;-->
+<!--}-->
+<!--.contact-info li {-->
+<!--  margin-bottom: 0.25rem;-->
+<!--}-->
+
+<!--/* -&#45;&#45; RESPONSYWNOŚĆ -&#45;&#45; */-->
+<!--@media (max-width: 768px) {-->
+<!--  .profile-top {-->
+<!--    flex-direction: column;-->
+<!--    align-items: center;-->
+<!--  }-->
+
+<!--  .profile-contact-wrapper {-->
+<!--    width: 100%;-->
+<!--    align-items: center;-->
+<!--  }-->
+
+<!--  .short-card, .same-width, .experience-list {-->
+<!--    max-width: 100%;-->
+<!--  }-->
+<!--}-->
+<!--</style>-->
+
+
+
+
+
+
 
 
 
