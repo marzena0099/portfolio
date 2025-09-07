@@ -147,8 +147,8 @@
 <!--}-->
 <!--</style>-->
 
-
 <template>
+
   <section id="projects" class="section-box">
     <h2>Projekty</h2>
     <div v-for="(proj, index) in projects" :key="proj.id" class="card same-width">
@@ -157,8 +157,23 @@
         <span class="triangle" :class="{ open: proj.open }">▼</span>
       </h3>
       <div v-show="proj.open" class="card-content">
-        <p>{{ proj.description }}</p>
-        <div class="project-links">
+        <p
+            class="technologies-tooltip"
+            :title="'Opis projektu:\n' + proj.description"
+        >
+          <strong>Opis:</strong> {{ proj.description }}
+
+        </p>
+
+        <p
+            class="technologies-tooltip"
+            :title="'Technologie użyte w projekcie:\n' + proj.technologies"
+        >
+          <strong>Technologie:</strong> {{ proj.technologies }}
+        </p>
+
+
+      <div class="project-links">
           <a v-if="proj.githubLink" :href="proj.githubLink" target="_blank">GitHub</a>
           <a :href="`http://localhost:8080/api/projects/download/${proj.id}`" download>
             Pobierz
@@ -255,221 +270,20 @@ export default {
 .expandable-header:hover {
   color: #f687b3;
 }
+
+  .technologies-tooltip {
+    display: block;        /* <-- to wymusza nową linię */
+    margin: 0.5rem 0;      /* odstęp między opisem a technologiami */
+    cursor: help;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .technologies-tooltip:hover {
+    background: rgba(246, 135, 179, 0.15);
+    color: #f687b3;
+  }
+
 </style>
 
-
-
-<!--<template>-->
-<!--  <section id="projects" class="section-box">-->
-<!--    <h2>Projekty</h2>-->
-<!--    <div v-for="(proj, index) in projects" :key="index" class="card same-width">-->
-<!--      <h3 class="expandable-header" @click="toggleProject(index)">-->
-<!--        {{ proj.title }}-->
-<!--        <span class="triangle" :class="{ open: proj.open }">▼</span>-->
-<!--      </h3>-->
-<!--      <div v-show="proj.open" class="card-content">-->
-<!--        <p>{{ proj.description }}</p>-->
-<!--        <div class="project-links">-->
-<!--          <a v-if="proj.githubLink" :href="proj.githubLink" target="_blank">GitHub</a>-->
-<!--          <a v-if="proj.downloadLink" :href="proj.downloadLink" download>Pobierz</a>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </section>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--  data() {-->
-<!--    return {-->
-<!--      projects: [-->
-<!--        {-->
-<!--          title: "Projekt 1",-->
-<!--          description: "Krótki opis projektu backendowego...",-->
-<!--          githubLink: "https://github.com/TwojRepo/projekt1",-->
-<!--          downloadLink: "", // jeśli nie ma githuba, podajesz link do pliku-->
-<!--          open: false-->
-<!--        },-->
-<!--        {-->
-<!--          title: "Projekt 2",-->
-<!--          description: "Inny projekt backendowy...",-->
-<!--          githubLink: "",-->
-<!--          downloadLink: "/downloads/projekt2.zip",-->
-<!--          open: false-->
-<!--        }-->
-<!--      ]-->
-<!--    };-->
-<!--  },-->
-<!--  methods: {-->
-<!--    toggleProject(index) {-->
-<!--      this.projects[index].open = !this.projects[index].open;-->
-<!--    }-->
-<!--  }-->
-<!--};-->
-<!--</script>-->
-
-<!--<style scoped>-->
-<!--.card {-->
-<!--  background: #fff;-->
-<!--  border-radius: 1rem;-->
-<!--  padding: 1rem;-->
-<!--  margin-bottom: 1rem;-->
-<!--  box-shadow: 0 4px 12px rgba(0,0,0,0.08);-->
-<!--  transition: transform 0.2s ease, box-shadow 0.2s ease;-->
-<!--}-->
-<!--.card:hover {-->
-<!--  transform: translateY(-2px);-->
-<!--  box-shadow: 0 6px 16px rgba(0,0,0,0.12);-->
-<!--}-->
-<!--.same-width {-->
-<!--  max-width: 700px;-->
-<!--}-->
-<!--.triangle {-->
-<!--  display: inline-block;-->
-<!--  margin-left: 0.5rem;-->
-<!--  width: 0;-->
-<!--  height: 0;-->
-<!--  border-left: 6px solid transparent;-->
-<!--  border-right: 6px solid transparent;-->
-<!--  border-top: 8px solid #f687b3;-->
-<!--  transition: transform 0.3s ease;-->
-<!--}-->
-<!--.triangle.open {-->
-<!--  transform: rotate(180deg);-->
-<!--}-->
-<!--.project-links a {-->
-<!--  margin-right: 1rem;-->
-<!--  color: #f687b3;-->
-<!--  text-decoration: underline;-->
-<!--}-->
-<!--</style>-->
-
-
-<!--<template>-->
-<!--  <section id="projects" class="portfolio-section section-box">-->
-<!--    <h2>Projekty</h2>-->
-<!--    <div class="projects-grid">-->
-<!--      <div v-for="(proj, index) in projects" :key="proj.id" class="card same-width">-->
-<!--        <h3 class="expandable-header" @click="toggleProject(index)">-->
-<!--          {{ proj.title }}-->
-<!--          <span class="triangle" :class="{ open: proj.open }">▼</span>-->
-<!--        </h3>-->
-<!--        <div v-show="proj.open" class="card-content">-->
-<!--          <p>{{ proj.description }}</p>-->
-<!--          <p><strong>Technologie:</strong> {{ proj.technologies }}</p>-->
-<!--          <div class="links">-->
-<!--            <a v-if="proj.githubLink" :href="proj.githubLink" target="_blank">GitHub</a>-->
-<!--            <a v-if="proj.demoLink" :href="proj.demoLink" target="_blank">Demo</a>-->
-<!--            <a v-if="proj.downloadLink" :href="proj.downloadLink" target="_blank">Pobierz</a>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </section>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--export default {-->
-<!--  name: "Projects",-->
-<!--  data() {-->
-<!--    return {-->
-<!--      projects: [-->
-<!--        {-->
-<!--          id: 1,-->
-<!--          title: "Portfolio Online",-->
-<!--          description: "Responsywne portfolio z Vue i CSS, pokazujące doświadczenie i projekty.",-->
-<!--          technologies: "Vue 3, HTML, CSS, JavaScript",-->
-<!--          githubLink: "https://github.com/marzena0099/portfolio",-->
-<!--          demoLink: "",-->
-<!--          downloadLink: "",-->
-<!--          open: false-->
-<!--        },-->
-<!--        {-->
-<!--          id: 2,-->
-<!--          title: "Aplikacja ToDo",-->
-<!--          description: "Prosta aplikacja do zarządzania zadaniami z lokalnym przechowywaniem danych.",-->
-<!--          technologies: "Vue 3, JavaScript, LocalStorage",-->
-<!--          githubLink: "https://github.com/marzena0099/todo-app",-->
-<!--          demoLink: "",-->
-<!--          downloadLink: "",-->
-<!--          open: false-->
-<!--        }-->
-<!--      ]-->
-<!--    }-->
-<!--  },-->
-<!--  methods: {-->
-<!--    toggleProject(index) {-->
-<!--      this.projects[index].open = !this.projects[index].open;-->
-<!--    }-->
-<!--  }-->
-<!--};-->
-<!--</script>-->
-
-<!--<style scoped>-->
-<!--.portfolio-section {-->
-<!--  background: rgba(255, 255, 255, 0.75);-->
-<!--  border-radius: 1rem;-->
-<!--  padding: 2rem;-->
-<!--  box-shadow: 0 4px 15px rgba(0,0,0,0.1);-->
-<!--  max-width: 1000px;-->
-<!--  margin: 2rem auto;-->
-<!--}-->
-
-<!--.projects-grid {-->
-<!--  display: flex;-->
-<!--  flex-direction: column;-->
-<!--  gap: 1rem;-->
-<!--}-->
-
-<!--.card {-->
-<!--  background: #ffffff;-->
-<!--  border-radius: 1rem;-->
-<!--  padding: 1rem;-->
-<!--  box-shadow: 0 4px 12px rgba(0,0,0,0.08);-->
-<!--  transition: transform 0.2s ease, box-shadow 0.2s ease;-->
-<!--}-->
-
-<!--.card:hover {-->
-<!--  transform: translateY(-2px);-->
-<!--  box-shadow: 0 6px 16px rgba(0,0,0,0.12);-->
-<!--}-->
-
-<!--.same-width {-->
-<!--  max-width: 700px;-->
-<!--}-->
-
-<!--.expandable-header {-->
-<!--  display: flex;-->
-<!--  align-items: center;-->
-<!--  justify-content: space-between;-->
-<!--  cursor: pointer;-->
-<!--  color: #1f2937;-->
-<!--  transition: color 0.3s ease;-->
-<!--}-->
-
-<!--.expandable-header:hover {-->
-<!--  color: #f687b3;-->
-<!--}-->
-
-<!--.triangle {-->
-<!--  display: inline-block;-->
-<!--  width: 0;-->
-<!--  height: 0;-->
-<!--  margin-left: 0.5rem;-->
-<!--  vertical-align: middle;-->
-<!--  border-left: 6px solid transparent;-->
-<!--  border-right: 6px solid transparent;-->
-<!--  border-top: 8px solid #f687b3;-->
-<!--  transition: transform 0.3s ease;-->
-<!--}-->
-
-<!--.triangle.open {-->
-<!--  transform: rotate(180deg);-->
-<!--}-->
-
-<!--.links a {-->
-<!--  margin-right: 1rem;-->
-<!--  color: #2563eb;-->
-<!--  text-decoration: underline;-->
-<!--}-->
-<!--</style>-->
