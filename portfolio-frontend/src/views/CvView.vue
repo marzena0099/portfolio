@@ -1,22 +1,3 @@
-<!--<template>-->
-<!--  <div>-->
-<!--    <h1>Moje CV</h1>-->
-<!--    <button @click="downloadCv">Pobierz CV</button>-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--import { downloadCv } from '@/services/cvService';-->
-
-<!--export default {-->
-<!--  name: 'CvView',-->
-<!--  methods: {-->
-<!--    downloadCv-->
-<!--  }-->
-<!--};-->
-
-<!--</script>-->
-
 <template>
   <div class="section-box cv-section">
     <h2>Moje CV</h2>
