@@ -6,25 +6,23 @@ export const downloadCv = async () => {
             responseType: 'blob'
         });
 
-        const url = window.URL.createObjectURL(new Blob([response.data]));
+
+        const blob = new Blob([response.data], {type: 'application/pdf'});
+
+
+        const fileName = 'Marzena_Bialonczyk_CV.pdf';
+
+        const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-
-        const contentDisposition = response.headers['content-disposition'];
-        let fileName = 'CV.pdf';
-        if (contentDisposition) {
-            const match = contentDisposition.match(/filename\*?=['"]?UTF-8''(.+)/);
-            if (match && match[1]) {
-                fileName = decodeURIComponent(match[1]);
-            }
-        }
-
-        link.setAttribute('download', fileName);
+        link.download = fileName;
         document.body.appendChild(link);
         link.click();
         link.remove();
+
         window.URL.revokeObjectURL(url);
 
+        console.log('CV pobrane jako:', fileName);
     } catch (error) {
         console.error('Błąd przy pobieraniu CV:', error);
     }

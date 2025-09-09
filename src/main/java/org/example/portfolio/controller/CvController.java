@@ -87,6 +87,7 @@ public class CvController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename*=UTF-8''" + encodedFileName)
+                .header("Access-Control-Expose-Headers", "Content-Disposition")
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(cv.getData());
     }

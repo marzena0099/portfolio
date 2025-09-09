@@ -1,37 +1,23 @@
 <template>
-  <div class="section-box cv-section">
-    <h2>Moje CV</h2>
-    <p>Pobierz moje CV klikając przycisk poniżej:</p>
-    <button class="cv-button" @click="downloadCv">Pobierz CV</button>
-  </div>
-</template>
+    <div class="section-box cv-section">
+      <h2>Moje CV</h2>
+      <p>Pobierz moje CV klikając przycisk poniżej:</p>
+      <button class="cv-button" @click="downloadCv">Pobierz CV</button>
+    </div>
+  </template>
 
-<script>
-export default {
-  name: 'CvView',
-  methods: {
-    downloadCv() {
-      const url = import.meta.env.VITE_CV_API || 'http://localhost:8080/api/cv';
+  <script>
+    import { downloadCv } from '@/services/cvService.js';
 
-      fetch(url)
-          .then(response => {
-            if (!response.ok) throw new Error("Błąd pobierania CV");
-            return response.blob();
-          })
-          .then(blob => {
-            const link = document.createElement('a');
-            link.href = window.URL.createObjectURL(blob);
-            link.download = 'Marzena_Bialonczyk_CV.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            window.URL.revokeObjectURL(link.href);
-          })
-          .catch(err => console.error(err));
-    }
-  }
-};
-</script>
+    export default {
+      name: 'CvView',
+      methods: {
+        downloadCv() {
+          downloadCv();
+        }
+      }
+    };
+  </script>
 
 <style>
 .cv-section {
