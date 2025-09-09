@@ -11,13 +11,23 @@ export default {
   name: 'CvView',
   methods: {
     downloadCv() {
-      // Tworzymy dynamiczny link do pobrania
-      const link = document.createElement('a');
-      link.href = '/cv.pdf'; // ścieżka do pliku CV
-      link.download = 'Marzena_Bialonczyk_CV.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const url = import.meta.env.VITE_CV_API || 'http://localhost:8080/api/cv';
+
+      fetch(url)
+          .then(response => {
+            if (!response.ok) throw new Error("Błąd pobierania CV");
+            return response.blob();
+          })
+          .then(blob => {
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'Marzena_Bialonczyk_CV.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(link.href);
+          })
+          .catch(err => console.error(err));
     }
   }
 };

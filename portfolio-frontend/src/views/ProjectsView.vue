@@ -1,34 +1,36 @@
 <template>
-
   <section id="projects" class="section-box">
     <h2>Projekty</h2>
+
     <div v-for="(proj, index) in projects" :key="proj.id" class="card same-width">
       <h3 class="expandable-header" @click="toggleProject(index)">
         {{ proj.title }}
         <span class="triangle" :class="{ open: proj.open }">▼</span>
       </h3>
+
       <div v-show="proj.open" class="card-content">
-        <p
-            class="technologies-tooltip"
-            :title="'Opis projektu:\n' + proj.description"
-        >
+        <p class="technologies-tooltip">
           <strong>Opis:</strong> {{ proj.description }}
-
         </p>
 
-        <p
-            class="technologies-tooltip"
-            :title="'Technologie użyte w projekcie:\n' + proj.technologies"
-        >
-          <strong>Technologie:</strong> {{ proj.technologies }}
-        </p>
+        <div class="project-tech-icons">
+          <strong>Technologie:</strong>
+          <div class="icons-list">
+            <div v-for="tech in proj.technologies" :key="tech" class="tech-item">
+              <img
+                  :src="getIconPath(tech)"
+                  :alt="tech"
+                  :title="tech"
+                  class="tech-icon"
+              />
+              <span class="tech-label">{{ tech }}</span>
+            </div>
+          </div>
+        </div>
 
-
-      <div class="project-links">
+        <div class="project-links">
           <a v-if="proj.githubLink" :href="proj.githubLink" target="_blank">GitHub</a>
-          <a :href="`http://localhost:8080/api/projects/download/${proj.id}`" download>
-            Pobierz
-          </a>
+          <a :href="`http://localhost:8080/api/projects/download/${proj.id}`" download>Pobierz</a>
         </div>
       </div>
     </div>
@@ -41,20 +43,31 @@ import axios from "axios";
 export default {
   data() {
     return {
-      projects: [] // tu już pusta tablica, bo uzupełni ją backend
+      projects: []
     };
   },
   mounted() {
     axios.get("http://localhost:8080/api/projects")
         .then(res => {
-          // dodajemy "open: false" do każdego projektu, żeby działał akordeon
-          this.projects = res.data.map(proj => ({ ...proj, open: false }));
+          this.projects = res.data.map(proj => ({
+            ...proj,
+            open: false,
+            technologies: proj.technologies.split(",").map(t => t.trim())
+          }));
         })
         .catch(err => console.error("Błąd pobierania projektów:", err));
   },
   methods: {
     toggleProject(index) {
       this.projects[index].open = !this.projects[index].open;
+    },
+    getIconPath(tech) {
+      try {
+
+        return new URL(`../assets/icons/${tech}.svg`, import.meta.url).href;
+      } catch (e) {
+        return new URL(`../assets/icons/default.svg`, import.meta.url).href;
+      }
     }
   }
 };
@@ -84,9 +97,7 @@ export default {
   box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
-.same-width {
-  max-width: 700px;
-}
+.same-width { max-width: 700px; }
 
 .triangle {
   display: inline-block;
@@ -99,16 +110,7 @@ export default {
   transition: transform 0.3s ease;
 }
 
-.triangle.open {
-  transform: rotate(180deg);
-}
-
-.project-links a {
-  margin-right: 1rem;
-  color: #f687b3;
-  text-decoration: underline;
-  font-weight: 600;
-}
+.triangle.open { transform: rotate(180deg); }
 
 .expandable-header {
   cursor: pointer;
@@ -118,23 +120,42 @@ export default {
   justify-content: space-between;
 }
 
-.expandable-header:hover {
-  color: #f687b3;
+.expandable-header:hover { color: #f687b3; }
+
+.project-tech-icons { margin-top: 0.5rem; }
+
+.icons-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 5px;
 }
 
-  .technologies-tooltip {
-    display: block;        /* <-- to wymusza nową linię */
-    margin: 0.5rem 0;      /* odstęp między opisem a technologiami */
-    cursor: help;
-    padding: 4px 6px;
-    border-radius: 6px;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #333;
+}
 
-  .technologies-tooltip:hover {
-    background: rgba(246, 135, 179, 0.15);
-    color: #f687b3;
-  }
+.tech-icon {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s ease;
+  margin-bottom: 4px;
+}
 
+.tech-icon:hover { transform: scale(1.2); }
+
+.tech-label { text-align: center; }
+
+.project-links { margin-top: 10px; }
+
+.project-links a {
+  margin-right: 1rem;
+  color: #f687b3;
+  text-decoration: underline;
+  font-weight: 600;
+}
 </style>
-

@@ -3,7 +3,6 @@
     <section id="about" class="about-section section-box">
       <div class="profile-container">
 
-        <!-- Górna część: zdjęcie + dane kontaktowe -->
         <div class="profile-top">
           <img src="@/assets/images/MB_CV.jpg" alt="Marzena Białończyk" class="profile-image" />
 
@@ -29,7 +28,6 @@
           </div>
         </div>
 
-        <!-- Doświadczenie (wyżej niż reszta sekcji) -->
         <div class="profile-bottom">
           <div class="card same-width">
             <h2 class="expandable-header" @click="toggleExperience">
@@ -47,7 +45,6 @@
             </div>
           </div>
 
-          <!-- Inne sekcje akordeonowe -->
           <div v-for="(section, index) in sections" :key="index" class="card same-width">
             <h2 class="expandable-header" @click="toggleSection(index)">
               {{ section.title }}
@@ -167,7 +164,6 @@ export default {
   margin-bottom: 1rem;
 }
 
-/* Karty */
 .card {
   background: #ffffff;
   border-radius: 1rem;
@@ -238,7 +234,6 @@ export default {
   font-style: italic;
 }
 
-/* Nagłówki akordeonu */
 .expandable-header {
   display: flex;
   align-items: center;
@@ -252,7 +247,6 @@ export default {
   color: #f687b3; /* różowy przy hover */
 }
 
-/* Trójkąty różowe */
 .triangle {
   display: inline-block;
   width: 0;

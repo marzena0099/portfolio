@@ -15,12 +15,6 @@ public class CvFile {
     @Column(name = "file_name", nullable = false)
     private String fileName;
 
-//    @Lob
-//    @Column(nullable = false)
-//    private byte[] data;
-//    @Lob
-//    @Column(nullable = false)
-//    private Blob data;
 @Lob
 @Column(name="data", columnDefinition="bytea", nullable=false)
 private byte[] data;
