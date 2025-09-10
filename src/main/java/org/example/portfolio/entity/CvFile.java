@@ -14,7 +14,7 @@ public class CvFile {
     private String fileName;
 
 @Lob
-@Column(name="data", columnDefinition="bytea", nullable=false)
+@Column(name="data",  nullable=false)
 private byte[] data;
 
 

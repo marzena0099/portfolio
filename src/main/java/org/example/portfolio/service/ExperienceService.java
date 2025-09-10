@@ -113,7 +113,7 @@ public class ExperienceService {
             return "";
         }
 
-        String result = rawDesc.replaceAll("•", "\n");
+        String result = rawDesc.replaceAll("•", "");
 
         return result.trim();
     }
