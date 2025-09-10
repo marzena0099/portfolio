@@ -3,8 +3,6 @@ package org.example.portfolio.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Blob;
-
 @Entity
 @Data
 @Table(name="cv")

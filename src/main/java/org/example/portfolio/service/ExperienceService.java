@@ -1,18 +1,16 @@
 package org.example.portfolio.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.example.portfolio.entity.Experience;
 import org.example.portfolio.repository.ExperienceRepository;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ExperienceService {
@@ -28,28 +27,15 @@ public class ExperienceService {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MM/yyyy");
 
-    /**
-     * Główna metoda – czyści tabelę i wczytuje doświadczenia z CV.
-     */
     @Transactional
     public void reloadFromCV(File cvFile) throws IOException {
         List<Experience> experiences = parseExperience(cvFile);
 
         experienceRepository.deleteAll();
-
-        for (Experience exp : experiences) {
-            System.out.println("💾 Zapisuję doświadczenie: " + exp.getTitle());
-
-            experienceRepository.save(exp);
-        }
+        experienceRepository.saveAll(experiences);
     }
 
-    /**
-     * Parsowanie doświadczeń z PDF.
-     */
     public List<Experience> parseExperience(File cvFile) throws IOException {
-
-
         List<Experience> experiences = new ArrayList<>();
 
         try (PDDocument document = PDDocument.load(cvFile)) {
@@ -62,7 +48,7 @@ public class ExperienceService {
 
             for (String entry : entries) {
                 try {
-                    // Pomijamy nagłówki sekcji
+
                     if (entry.matches("(?i).*Wykształcenie.*|.*Pasje.*")) {
                         continue;
                     }
@@ -87,16 +73,16 @@ public class ExperienceService {
                         }
                         // Pobieramy opis i dzielimy na podpunkty
                         String description = entry.substring(headerMatcher.end()).trim();
-                        String[] subpoints = description.split("(?<=\\)|\\.|;|\\n)"); // kończy na ), ., ; lub nowa linia
+                        String[] subpoints = description.split("(?<=[).;\\n])");
                         StringBuilder cleaned = new StringBuilder();
                         for (String sp : subpoints) {
                             sp = sp.trim();
                             if (!sp.isEmpty()) {
-                                cleaned.append(cleanDescription(sp)).append("\n"); // każdy podpunkt od nowej linii
+                                cleaned.append(cleanDescription(sp)).append("\n");
                             }
                         }
 
-                        exp.setDescription(cleaned.toString().trim()); // ustawiamy tylko raz
+                        exp.setDescription(cleaned.toString().trim());
                         experiences.add(exp);
                     }
 
@@ -123,16 +109,14 @@ public class ExperienceService {
     }
 
     private String cleanDescription(String rawDesc) {
-    if (rawDesc == null || rawDesc.isEmpty()) {
-        return "";
+        if (rawDesc == null || rawDesc.isEmpty()) {
+            return "";
+        }
+
+        String result = rawDesc.replaceAll("•", "\n");
+
+        return result.trim();
     }
-
-    // Zamień "  •" na nową linię
-    String result = rawDesc.replaceAll("•", "\n");
-
-    return result.trim();
-}
-
 
 
 }

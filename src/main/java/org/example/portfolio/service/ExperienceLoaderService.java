@@ -2,14 +2,13 @@ package org.example.portfolio.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.example.portfolio.entity.Experience;
-import org.example.portfolio.repository.ExperienceRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class ExperienceLoaderService {
@@ -19,25 +18,22 @@ public class ExperienceLoaderService {
 
     @PostConstruct
     public void init() {
-        try {
-            File file = new File(cvFilePath);
+            try {
+                File file = new File(cvFilePath);
 
-            if (!file.exists()) {
-                System.err.println("Plik CV nie istnieje: " + cvFilePath);
-                return;
+                if (!file.exists()) {
+                    log.error("CV file does not exist {}", cvFilePath);
+                    return;
+                }
+
+                if (file.length() == 0) {
+                    return;
+                }
+                experienceService.reloadFromCV(file);
+
+            } catch (Exception e) {
+                log.error("Błąd podczas wczytywania doświadczenia z CV", e);
             }
-
-            if (file.length() == 0) {
-                System.err.println("Plik CV jest pusty: " + cvFilePath);
-                return;
-            }
-
-            System.out.println("Ładuję doświadczenia z CV: " + file.getName());
-            experienceService.reloadFromCV(file);  // <--- tutaj wywołanie
-
-        } catch (Exception e) {
-            System.err.println("Błąd podczas parsowania CV: " + e.getMessage());
-            e.printStackTrace();
         }
+
     }
-}

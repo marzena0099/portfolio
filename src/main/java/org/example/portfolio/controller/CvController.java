@@ -82,7 +82,7 @@ public class CvController {
 
         System.out.println("Pobieram CV: " + cv.getFileName() + ", rozmiar: " + cv.getData().length + " bajtów");
 
-        // zakodowanie nazwy pliku w UTF-8
+
         String encodedFileName = URLEncoder.encode(cv.getFileName(), StandardCharsets.UTF_8).replaceAll("\\+", "%20");
 
         return ResponseEntity.ok()
