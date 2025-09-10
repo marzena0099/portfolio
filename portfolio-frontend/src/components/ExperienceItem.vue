@@ -15,8 +15,8 @@ import { computed, defineProps } from 'vue';
 interface Experience {
   title: string;
   company: string;
-  startDate: string;   // np. "2025-07"
-  endDate?: string;    // np. "2025-08"
+  startDate: string;
+  endDate?: string;
   description?: string;
 }
 
