@@ -1,4 +1,3 @@
-
 <template>
   <div class="experience-item">
     <h4>{{ experience.title }} – {{ experience.company }}</h4>
@@ -10,27 +9,36 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    experience: { type: Object, required: true }
-  },
-  computed: {
-    formattedDates() {
-      const start = this.experience.startDate;
-      const end = this.experience.endDate || 'present';
-      return `${start} – ${end}`;
-    },
-    descriptionLines() {
+<script setup lang="ts">
+import { computed, defineProps } from 'vue';
 
-      if (!this.experience.description) return [];
-      return this.experience.description
-          .split('\n')
-          .map(line => line.trim())
-          .filter(line => line.length > 0);
-    }
-  }
-};
+interface Experience {
+  title: string;
+  company: string;
+  startDate: string;   // np. "2025-07"
+  endDate?: string;    // np. "2025-08"
+  description?: string;
+}
+
+const props = defineProps<{
+  experience: Experience
+}>();
+
+
+const formattedDates = computed(() => {
+  const start = props.experience.startDate;
+  const end = props.experience.endDate || 'present';
+  return `${start} – ${end}`;
+});
+
+
+const descriptionLines = computed(() => {
+  if (!props.experience.description) return [];
+  return props.experience.description
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line.length > 0);
+});
 </script>
 
 <style scoped>
