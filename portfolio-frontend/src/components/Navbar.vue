@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <router-link to="/" class="nav-link">Home</router-link>
+    <router-link to="/" class="nav-link">Start</router-link>
     <router-link to="/projects" class="nav-link">Projekty</router-link>
     <router-link to="/cv" class="nav-link">CV</router-link>
     <router-link to="/contact" class="nav-link">Kontakt</router-link>
