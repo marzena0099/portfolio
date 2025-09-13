@@ -13,12 +13,12 @@ import java.io.File;
 @RequiredArgsConstructor
 public class ExperienceLoaderService {
     private final ExperienceService experienceService;
-    @Value("${CV_FILE_PATH}")
-    private String cvFilePath;
 
     @PostConstruct
     public void init() {
             try {
+                //    @Value("${CV_FILE_PATH}")
+                String cvFilePath = "C:\\Users\\marzenusia\\IdeaProjects\\pliki\\portfolio\\src\\main\\resources\\static\\Marzena_Białończyk_CV_PL_16.07.2025.pdf";
                 File file = new File(cvFilePath);
 
                 if (!file.exists()) {
