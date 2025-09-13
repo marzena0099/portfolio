@@ -31,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/portfolio-frontend/
+/portfolio-frontend/node_modules/**
