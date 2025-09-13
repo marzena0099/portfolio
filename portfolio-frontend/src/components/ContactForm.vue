@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     sendMessage() {
-      axios.post('http://localhost:8080/api/messages', this.form)
+      axios.post('/api/messages', this.form)
           .then(() => {
             this.successMessage = 'Wiadomość wysłana!';
             this.errorMessage = '';

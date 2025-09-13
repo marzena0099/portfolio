@@ -110,7 +110,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:8080/api/experience")
+    axios.get("/api/experience")
         .then(res => this.experience = res.data)
         .catch(err => console.error("Błąd pobierania experience:", err));
   },

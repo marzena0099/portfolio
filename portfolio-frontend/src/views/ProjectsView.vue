@@ -30,7 +30,7 @@
 
         <div class="project-links">
           <a v-if="proj.githubLink" :href="proj.githubLink" target="_blank">GitHub</a>
-          <a :href="`http://localhost:8080/api/projects/download/${proj.id}`" download>Pobierz</a>
+          <a :href="`/api/projects/download/${proj.id}`" download>Pobierz</a>
         </div>
       </div>
     </div>
@@ -47,7 +47,7 @@ export default {
     };
   },
   mounted() {
-    axios.get("http://localhost:8080/api/projects")
+    axios.get("/api/projects")
         .then(res => {
           this.projects = res.data.map(proj => ({
             ...proj,

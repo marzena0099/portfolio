@@ -37,7 +37,7 @@ export default {
   methods: {
     async submitForm() {
       try {
-        const res = await fetch('http://localhost:8080/api/messages', {
+        const res = await fetch('/api/messages', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

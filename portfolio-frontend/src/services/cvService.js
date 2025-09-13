@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const downloadCv = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/api/cv', {
+        const response = await axios.get('/api/cv', {
             responseType: 'blob'
         });
 
