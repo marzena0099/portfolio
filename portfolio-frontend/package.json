@@ -14,7 +14,10 @@
   "dependencies": {
     "axios": "^1.11.0",
     "vue": "^3.5.18",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "@fortawesome/fontawesome-svg-core": "^7.0.1",
+    "@fortawesome/vue-fontawesome": "^3.1.2",
+    "@fortawesome/free-brands-svg-icons": "^7.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.12",
