@@ -8,7 +8,7 @@
       </label>
 
       <label>
-        Email:
+        Email:jj
         <input v-model="email" type="email" required />
       </label>
 
